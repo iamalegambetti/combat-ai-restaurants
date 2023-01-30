@@ -36,7 +36,7 @@ python3 src/gpt_2/train.py
 The script can be parametrized by setting the learning rate "-lr" (default 1e-04), and whether optimizing for the Youden's J statistics "--youden" (default True).
 The model automatically saves the weights at each best epoch in the /output folder. 
 
-Also, we provide GPT-2 best weights to directly perform evaluation and inference. Download [here][https://drive.google.com/file/d/1-UysTaJ_qW3baj8NL05IujJW-FI66pQI/view?usp=sharing]. Store them in the /output folder.  #### PUT LINK 
+Also, we provide GPT-2 best weights to directly perform evaluation and inference. Download [here](https://drive.google.com/file/d/1-UysTaJ_qW3baj8NL05IujJW-FI66pQI/view?usp=sharing). Store them in the /output folder. 
 
 Evaluation:
 ```

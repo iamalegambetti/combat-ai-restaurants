@@ -23,7 +23,7 @@ Summary table of models available and command to use:
 | Random Forest       | rf      |
 | XGBoost             | xgb     |
 
-Optionally, a --save argument can be passed to save the model weights (default "False").
+Optionally, a "--save" argument can be passed to save the model weights (default "False").
 Here, train and test is automatically performed. 
 
 ### Deep Learning Models

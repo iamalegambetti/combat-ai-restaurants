@@ -30,7 +30,7 @@ def transform_data(train, test):
     return X_train, y_train, X_test, y_test
 
 
-models = {"lr":{'model':LogisticRegression(max_iter=1000), 'params':{"C":[0.001, 0.01, 0.1]}},
+models = {"lr":{'model':LogisticRegression(max_iter=1000), 'params':{"C":[0.001, 0.01, 0.1, 1, 10, 100]}},
     'nb':{'model':MultinomialNB(), 'params':{"alpha":[0.001, 0.01, 0.1, 1, 10, 100]}},
     'rf':{'model':RandomForestClassifier(), 'params':{"n_estimators":[75, 100, 125], 
         "max_depth":[12, 14, 16], "min_samples_split":[2,3,4]}},

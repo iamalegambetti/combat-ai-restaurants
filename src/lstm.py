@@ -1,7 +1,6 @@
 #! pip install torchtext==0.10.0
 
 import torch
-import pandas as pd
 import numpy as np
 from torchtext import data
 import torchtext

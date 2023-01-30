@@ -9,6 +9,7 @@ import torch.nn as nn
 import torch.optim as optim
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import argparse
+print('LSTM')
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-lr", default=0.0001, required=False, type=float, help="Learning rate.")

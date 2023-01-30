@@ -53,6 +53,7 @@ Here, you can change the weights path and j as in the evaluation script.
 
 
 #### BiLSTM
+IMPORTANT:
 BiLSTM requires the the installation of torchtext==0.10.0. Thus, a downgraded general version of torch may be needed. We used torch==1.9.0. Train and test are performed simoultaneously. 
 
 ```

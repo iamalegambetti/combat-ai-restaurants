@@ -1,6 +1,8 @@
 # Combat AI with AI: ounteract Machine-Generated Fake Restaurant Reviews on Social Media [Classifiers Replication Code]
 
-This repository includes the replication code for modeling part of the paper "Combat AI with AI: ounteract Machine-Generated Fake Restaurant Reviews on Social Media".
+This repository includes the replication code for modeling part of the paper "Combat AI with AI: Counteract Machine-Generated Fake Restaurant Reviews on Social Media".
+
+In our implementation, Python 3.8 was used. 
 
 ## Data
 The /data folder contains the partitions used to train, validate, and test the models.

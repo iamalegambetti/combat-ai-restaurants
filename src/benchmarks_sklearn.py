@@ -30,7 +30,7 @@ def transform_data(train, test):
     return X_train, y_train, X_test, y_test
 
 
-models = {"lr":{'model':LogisticRegression(max_iter=1000), 'params':{"C":[0.001, 0.01, 0.1, 1, 10, 100]}},
+models = {"lr":{'model':LogisticRegression(max_iter=2000), 'params':{"C":[0.001, 0.01, 0.1, 1, 10, 100]}},
     'nb':{'model':MultinomialNB(), 'params':{"alpha":[0.001, 0.01, 0.1, 1, 10, 100]}},
     'rf':{'model':RandomForestClassifier(), 'params':{"n_estimators":[75, 100, 125], 
         "max_depth":[12, 14, 16], "min_samples_split":[2,3,4]}},
@@ -74,6 +74,7 @@ def pipeline_sklearn(model_name, path_train="./data/train.csv", path_test="./dat
     train, test = load_data(path_train, path_test)
     X_train, y_train, X_test, y_test = transform_data(train, test)
     best_estimator = optimise(model_name, X_train, y_train, save)
+    print(best_estimator)
     pred = predict(best_estimator, X_test)
     metrics(pred, y_test)
 

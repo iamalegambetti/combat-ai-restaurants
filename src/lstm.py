@@ -166,7 +166,7 @@ def evaluate(model,iterator,criterion):
             epoch_loss += loss.item()
             epoch_acc += acc.item()
         
-    return epoch_loss / len(iterator), epoch_acc / len(iterator), np.mean(precs), np.mean(recs)
+    return epoch_loss / len(iterator), epoch_acc / len(iterator), np.mean(precs), np.mean(recs), np.mean(accs)
 
 EPOCH_NUMBER = 100
 best_acc = 0

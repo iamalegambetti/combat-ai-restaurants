@@ -12,7 +12,7 @@ import argparse
 # script arguments 
 parser = argparse.ArgumentParser()
 parser.add_argument('--weights_path', default='./output/gpt2_6_best.pt', required=False, type=str, help="Trained weights to evaluate.")
-parser.add_argument('-j', default=0.6144000291824341, required=False, type=float, help='Thresold for optimisation. Defaults to 0.6414')
+parser.add_argument('-j', default=0.6407619118690491, required=False, type=float, help='Thresold for optimisation. Defaults to 0.6408')
 args = parser.parse_args()
 
 print('Loading Model..')
@@ -52,6 +52,7 @@ def evaluate_gpt(j = j):
             predictions.append(y_pred_test)
             true.append(y_test)    
     metrics(predictions, true)
+
 
 
 def main():

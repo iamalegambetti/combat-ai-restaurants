@@ -11,8 +11,8 @@ import argparse
 
 # script arguments 
 parser = argparse.ArgumentParser()
-parser.add_argument('--weights_path', default='./output/gpt2_6_best.pt', required=False, type=str, help="Trained weights to evaluate.")
-parser.add_argument('-j', default=0.6407619118690491, required=False, type=float, help='Thresold for optimisation. Defaults to 0.6408')
+parser.add_argument('--weights_path', default='./output/gpt2_2.pt', required=False, type=str, help="Trained weights to evaluate.")
+parser.add_argument('-j', default=0.5947999954223633, required=False, type=float, help='Thresold for optimisation.')
 args = parser.parse_args()
 
 print('Loading Model..')

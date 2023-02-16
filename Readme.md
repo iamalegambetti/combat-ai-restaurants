@@ -1,6 +1,6 @@
-# Combat AI with AI: ounteract Machine-Generated Fake Restaurant Reviews on Social Media [Classifiers Replication Code]
+# Combat AI with AI: ounteract Machine-Generated Fake Restaurant Reviews on Social Media
 
-This repository includes the replication code for modeling part of the paper "Combat AI with AI: Counteract Machine-Generated Fake Restaurant Reviews on Social Media".
+This repository includes the replication code for modeling part of the paper "Combat AI with AI: Counteract Machine-Generated Fake Restaurant Reviews on Social Media". Paper available at [https://arxiv.org/abs/2302.07731](https://arxiv.org/abs/2302.07731).
 
 In our implementation, Python 3.8 was used. 
 
@@ -63,3 +63,17 @@ BiLSTM requires the the installation of torchtext==0.10.0. Thus, a downgraded ge
 python3 src/lstm.py
 ```
 The script can be parametrized by setting the learning rate "-lr" (default 1e-04).
+
+## Cite Us
+```bibtex
+@misc{gambetti2023fakereviews,
+  author = {Gambetti, Alessandro and Han, Qiwei},
+  title = {Combat AI With AI: Counteract Machine-Generated Fake Restaurant Reviews on Social Media},
+  publisher = {arXiv},
+  year = {2023},
+  keywords = {Computation and Language (cs.CL), Artificial Intelligence (cs.AI), Information Retrieval (cs.IR), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  doi = {10.48550/ARXIV.2302.07731},
+  url = {https://arxiv.org/abs/2302.07731},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+```

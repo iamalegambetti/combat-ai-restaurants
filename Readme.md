@@ -4,6 +4,11 @@ This repository includes the replication code for modeling part of the paper "Co
 
 In our implementation, Python 3.8 was used. 
 
+The experiments.ipynb and experimentsV2.ipynb notebooks report the evaluation of the models. 
+
+## Updates
+11 April 2023: Added GPT-Neo version. 
+
 ## Data
 The /data folder contains the partitions used to train, validate, and test the models.
 For machine learning models, i.e. Logistic Regression, Naive Bayes, Random Forest, and XGBoost the splits /data/train.csv and /data/test.csv should be used, as 5-fold cross-validation is automatically performed by the model. 
@@ -29,30 +34,39 @@ Optionally, a "--save" argument can be passed to save the model weights (default
 Here, train and test is automatically performed. 
 
 ### Deep Learning Models
-#### GPT-2
-Deep learning models are BiLSTM and GPT-2. 
+#### GPT
+Deep learning models are BiLSTM and GPT-2, and GPTNeo (open source alias for GPT-3).
 
-To train the GPT-2 use:
+To train GPT Models use:
 ```
-python3 src/gpt_2/train.py 
+python3 src/gpt/train.py --model_version "specific model version"
 ```
+Summary table of models available and command to use:
+| Model Version       | --model_version|
+|---------------------|----------|
+| GPTNeo 125M (default) |        EleutherAI/gpt-neo-125M |
+| GPT2 117M         | gpt2      |
+
+
+
 The script can be parametrized by setting the learning rate "-lr" (default 1e-04), and whether optimizing for the Youden's J statistics "--youden" (default True).
 The model automatically saves the weights at each best epoch in the /output folder. 
 
-Also, we provide GPT-2 best weights to directly perform evaluation and inference. Download [here](https://drive.google.com/file/d/1-C86zgQ8DjDWU8VJ75jP7DHwGMgrSi-d/view?usp=sharing). Store them in the /output folder. 
+
+##### Weights
+| Model Version       | Weights|
+|---------------------|----------|
+| GPTNeo 125M (default) |  [Here](https://drive.google.com/file/d/1OrweZO9L9nTmkGjHMIT_LHu9FVc_y6bM/view?usp=sharing)    |
+| GPT2 117M         |   [Here](https://drive.google.com/file/d/1-C86zgQ8DjDWU8VJ75jP7DHwGMgrSi-d/view?usp=sharing)     |
+
+Store them in the /output folder. 
 
 Evaluation:
 ```
-python3 src/gpt_2/evaluate.py
+python3 src/gpt/evaluate.py --model_version "specific model version" --weights_path "specific weights path"
 ```
-The scripts automatically uses the best weights found provided as above. However, you can change them at your needs by modifiying the "--weights_path /path_to_the_weights_you_want_to_use". You can also set a different classification threshold "-j 0.x" (default 0.5948).
+The scripts automatically uses the best GPTNeo weights provided as above. However, you can change them at your needs by modifiying the "--weights_path /path_to_the_weights_you_want_to_use". You can also set a different classification threshold "-j 0.x" (default 0.5708).
 
-Inference:
-Store a restaurant review in the file: review.txt. Run: 
-```
-python3 src/gpt_2/inference.py
-```
-Here, you can change the weights path and j as in the evaluation script. 
 
 
 #### BiLSTM

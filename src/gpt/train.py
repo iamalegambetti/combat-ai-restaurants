@@ -3,11 +3,11 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.optim.lr_scheduler import StepLR
 from dataset import FakeReviewsDataset
-from model import GPT2
+from model import GPT2, GPTNeo
 from torch.utils.data import DataLoader
 import os
 import numpy as np
-from transformers import GPT2Model
+from transformers import GPT2Model, GPTNeoForSequenceClassification
 from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_curve
 import argparse
 
@@ -15,6 +15,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-lr", default=0.0001, required=False, type=float, help="Learning rate.")
 parser.add_argument("--youden", default=True, required=False, type=bool, help="Set to True for Youden J Statistics optimization.")
+parser.add_argument("--model_version", default='EleutherAI/gpt-neo-125M', required=False, type=str, help="Backbone version of GPT models available.")
 args = parser.parse_args()
 
 def load_data(train, path = "./data/"):
@@ -28,9 +29,28 @@ def load_data(train, path = "./data/"):
         return test_dataloader
 
 # model 
-backbone_type = "gpt2"
-backbone = GPT2Model.from_pretrained(backbone_type)
-model = GPT2(backbone) 
+backbone_type = args.model_version
+
+if backbone_type == 'EleutherAI/gpt-neo-125M':
+    last_hidden_size = 768
+    backbone = GPTNeoForSequenceClassification.from_pretrained(backbone_type)
+    model = GPTNeo(backbone, last_hidden_size)
+    backbone_type_save = 'gpt-neo-125M'
+
+if backbone_type == 'gpt2-large':
+    last_hidden_size = 1280
+    backbone = GPT2Model.from_pretrained(backbone_type)
+    model = GPT2(backbone, last_hidden_size) 
+    backbone_type_save = backbone_type
+
+if backbone_type == 'gpt2':
+    last_hidden_size = 768
+    backbone = GPT2Model.from_pretrained(backbone_type)
+    model = GPT2(backbone, last_hidden_size) 
+    backbone_type_save = backbone_type
+
+
+# loss
 criterion = nn.BCEWithLogitsLoss()
 
 def sensivity_specifity_cutoff(y_true, y_score):
@@ -42,6 +62,7 @@ def train_gpt(EPOCHS=100, lr = args.lr):
 
     optimiser = torch.optim.AdamW(model.parameters(), lr=lr)
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print('Backbone type:', backbone_type)
     print('Training on device: ', device)
     print('Learning rate:', args.lr)
 
@@ -98,6 +119,7 @@ def train_gpt(EPOCHS=100, lr = args.lr):
 
             print(f'Prediction metrics at Youden {round(j, 4)}: ')
             probas = np.array(probas)
+            
             predictions_you = np.where(probas >= j, 1, 0)
             accuracy_you = accuracy_score(true, predictions_you)
             precision_you = precision_score(true, predictions_you)
@@ -111,10 +133,10 @@ def train_gpt(EPOCHS=100, lr = args.lr):
             if accs_to_optimize > best:
                 count = 0
                 print('Found best accuracy. Saving to disk.')
-                torch.save(model.state_dict(), f'./output/{backbone_type}_{epoch}.pt')
+                torch.save(model.state_dict(), f'./output/{backbone_type_save}_{epoch}.pt')
                 best = accuracy_you 
             
-        if count == 5:
+        if count == 10:
             print('Early stopping at epoch: ', epoch, '.')
             break
         
